@@ -1,5 +1,5 @@
 /*
-Rotate an array to the left by k positions without using extra space.k can be greater than the size of the array.
+Rotate an array to the left by k positions.k can be greater than the size of the array.
 
 Example:
 rotateLeft({1,2,3,4,5},2) --> {3,4,5,1,2}
