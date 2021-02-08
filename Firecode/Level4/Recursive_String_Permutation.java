@@ -47,3 +47,5 @@ public static void getPermutations(ArrayList<String> vals, StringBuilder sb, Str
         seen[i] = false;
     }
 }
+// Time : O(n * n!)
+// Space : O(n!)
