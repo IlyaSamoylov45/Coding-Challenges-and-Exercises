@@ -35,5 +35,66 @@ class Solution {
         }
     }
 }
-// Time : O(N!)
+// Time : O(N!(N-k)!)
+// Space : O(N!)
+
+
+
+
+
+
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> permutations = new ArrayList<List<Integer>>();
+        permute(nums, new LinkedHashSet<>(), permutations);
+        return permutations;
+    }
+
+    private void permute(int[] nums, Set<Integer> current, List<List<Integer>> permutations){
+        if(current.size() >= nums.length){
+            permutations.add(new LinkedList<>(current));
+            return;
+        }
+        for(int i = 0; i < nums.length; i++){
+            if(!current.add(nums[i])){
+                continue;
+            }
+            permute(nums, current, permutations);
+            current.remove(nums[i]);
+        }
+    }
+}
+// Time : O(N!(N-k)!)
+// Space : O(N!)
+
+
+
+
+
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> permutations = new ArrayList<List<Integer>>();
+        List<Integer> current = new LinkedList<>();
+        for(int num : nums){
+            current.add(num);
+        }
+        permute(nums.length, current, permutations, 0);
+        return permutations;
+    }
+
+    private void permute(int length, List<Integer> current, List<List<Integer>> permutations, int first){
+        if(first == length){
+            permutations.add(new LinkedList<>(current));
+        }
+
+        for(int i = first; i < length; i++){
+            Collections.swap(current, first, i);
+            permute(length, current, permutations, first + 1);
+            Collections.swap(current, first, i);
+        }
+    }
+}
+// Time : O(N!(N-k)!)
 // Space : O(N!)

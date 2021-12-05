@@ -82,5 +82,40 @@ class Solution {
     }
 }
 // Time : O(N)
-// Space : O(N
-)
+// Space : O(N)
+
+
+
+
+
+
+class Solution {
+    public int calPoints(String[] ops) {
+        Stack<Integer> stack = new Stack<>();
+        for(String op : ops){
+            if(op.equals("+")){
+                Integer x = stack.pop();
+                Integer y = stack.peek();
+                stack.push(x);
+                stack.push(x + y);
+            }else if(op.equals("D")){
+                Integer x = stack.peek();
+                x *= 2;
+                stack.push(x);
+            }
+            else if(op.equals("C")){
+                stack.pop();
+            }else{
+                stack.push(Integer.parseInt(op));
+            }
+        }
+        Integer sum = 0;
+        while(!stack.isEmpty()){
+            sum += stack.pop();
+        }
+        return sum;
+
+    }
+}
+// Time : O(N)
+// Space : O(N)

@@ -35,7 +35,7 @@
 
 
 
-
+// DFS
 class Solution {
     public int numIslands(char[][] grid) {
         int count = 0;
@@ -65,3 +65,111 @@ class Solution {
 }
 // Time : O(NM)
 // Space : O(NM)
+
+
+
+
+
+
+// DFS
+class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+
+        int num_islands = 0;
+        int height = grid.length;
+        int width = grid[0].length;
+
+        for(int row = 0; row < height; row++){
+            for(int col = 0; col < width; col++){
+                if(grid[row][col] == '1'){
+                    num_islands++;
+                    grid[row][col] = '0';
+
+                    Stack<Integer> stack = new Stack<>();
+                    stack.add(row * width + col);
+                    while(!stack.isEmpty()){
+                        int id = stack.pop();
+                        int currRow = id/width;
+                        int currCol = id % width;
+
+                        if(currRow - 1 >= 0 && grid[currRow-1][currCol] == '1'){
+                            stack.add((currRow - 1) * width + currCol);
+                            grid[currRow - 1][currCol] = '0';
+                        }
+                        if(currRow + 1 < height && grid[currRow+1][currCol] == '1'){
+                            stack.add((currRow + 1) * width + currCol);
+                            grid[currRow + 1][currCol] = '0';
+                        }
+                        if(currCol - 1 >= 0 && grid[currRow][currCol - 1] == '1'){
+                            stack.add(currRow * width + currCol - 1);
+                            grid[currRow][currCol - 1] = '0';
+                        }
+                        if(currCol + 1 < width && grid[currRow][currCol + 1] == '1'){
+                            stack.add(currRow * width + currCol + 1);
+                            grid[currRow ][currCol + 1] = '0';
+                        }
+                    }
+                }
+            }
+        }
+        return num_islands;
+    }
+
+}
+
+
+
+
+
+
+// BFS
+class Solution {
+    public int numIslands(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+
+        int num_islands = 0;
+        int height = grid.length;
+        int width = grid[0].length;
+
+        for(int row = 0; row < height; row++){
+            for(int col = 0; col < width; col++){
+                if(grid[row][col] == '1'){
+                    num_islands++;
+                    grid[row][col] = '0';
+
+                    Queue<Integer> queue = new LinkedList<>();
+                    queue.add(row * width + col);
+                    while(!queue.isEmpty()){
+                        int id = queue.remove();
+                        int currRow = id/width;
+                        int currCol = id % width;
+
+                        if(currRow - 1 >= 0 && grid[currRow-1][currCol] == '1'){
+                            queue.add((currRow - 1) * width + currCol);
+                            grid[currRow - 1][currCol] = '0';
+                        }
+                        if(currRow + 1 < height && grid[currRow+1][currCol] == '1'){
+                            queue.add((currRow + 1) * width + currCol);
+                            grid[currRow + 1][currCol] = '0';
+                        }
+                        if(currCol - 1 >= 0 && grid[currRow][currCol - 1] == '1'){
+                            queue.add(currRow * width + currCol - 1);
+                            grid[currRow][currCol - 1] = '0';
+                        }
+                        if(currCol + 1 < width && grid[currRow][currCol + 1] == '1'){
+                            queue.add(currRow * width + currCol + 1);
+                            grid[currRow ][currCol + 1] = '0';
+                        }
+                    }
+                }
+            }
+        }
+        return num_islands;
+    }
+
+}

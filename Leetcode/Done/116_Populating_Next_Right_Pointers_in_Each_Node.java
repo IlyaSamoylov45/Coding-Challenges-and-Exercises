@@ -61,6 +61,43 @@ class Node {
 };
 */
 
+
+
+
+class Solution {
+    public Node connect(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        if(root == null){
+            return null;
+        }
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            while(size-- > 0){
+                Node current = queue.remove();
+                if(size > 0){
+                    current.next = queue.peek();
+                }
+                if(current.left != null){
+                    queue.offer(current.left);
+                }
+                if(current.right != null){
+                    queue.offer(current.right);
+                }
+            }
+        }
+        return root;
+    }
+}
+// Time : O(N)
+// Space : O(N)
+
+
+
+
+
+
+
 class Solution {
     public Node connect(Node root) {
         Node level = root;
